@@ -6,7 +6,7 @@ using DInvoke;
 
 namespace dinvokemm
 {
-    class Program
+    public class dinvokemm
     {
         public static string ByteArrayToString(byte[] ba)
         {
@@ -46,9 +46,18 @@ namespace dinvokemm
 ");
         }
 
-        static void Main(string[] args)
+        public dinvokemm()
         {
+            Execute();
+        }
 
+        public static void Main(string[] args)
+        {
+            new dinvokemm();
+        }
+
+        public void Execute()
+        {
             banner();
 
             byte[] buf = new byte[510] {
