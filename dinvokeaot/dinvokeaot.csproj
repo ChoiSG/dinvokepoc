@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="DInvoke" Version="1.0.4" />
-	<PackageReference Include="Microsoft.DotNet.ILCompiler" Version="6.0.0-*" />
+	  <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="6.0.0-*" />
     
   </ItemGroup>
 

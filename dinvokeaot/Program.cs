@@ -6,17 +6,12 @@ using DynamicInvoke = DInvoke.DynamicInvoke;
 
 /*
  * For AOT Compilation: 
- * 1. (dev Powershell) dotnet new nuget 
+ * 1. Open up powershell - do NOT use developer powershell inside visual studio 
+ * 2. (Powershell) cd <~>\dinvokepoc\dinvokeaot 
+ * 3. (Powershell) dotnet publish -r win-x64 -c release
+ * 4. Check <~>\dinvokepoc\dinvokeaot\bin\release\net5.0\win-x64\publish\dinvokeaot.exe 
  * 
- * 2. Add following to nuget.config 
- * <add key="dotnet-experimental" value="https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-experimental/nuget/v3/index.json" />
- * <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
- * 
- * 3. Add following to csproj file 
- * <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="6.0.0-*" />
- * 
- * 4. (Powershell) dotnet publish -r win-x64 -c release
- * 
+ * 5. Have fun 
  * */
 
 namespace dinvokeaot
