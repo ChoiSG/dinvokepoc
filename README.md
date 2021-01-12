@@ -1,6 +1,6 @@
 ﻿# dinvokepoc 
 
-[관련 블로그 글 - DInvoke 개념, PoC, 대응방안](https://blog.sunggwanchoi.com/dinvoke-concept-poc-detection-kor/])
+[관련 블로그 글 - DInvoke 개념, PoC, 대응방안](https://blog.sunggwanchoi.com/dinvoke-concept-poc-detection-kor/)
 
 이 리포는 Dynamic Invoke와 관련된 PoC를 가지고 있습니다. 
 모든 PoC는 다음 함수 - OpenProcess,VirtualAllocEx, WriteProcessMemory, VirtualProtectEx, CreateRemoteThread - 를 이용한 기본적인 프로세스 인젝션입니다. 
